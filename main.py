@@ -1,18 +1,23 @@
+import random 
 from graphics import * 
+from neurons import * 
+
+SENSORIAL = 0 
+TRANSMITTER = 1 
+TERMINAL = 2 
 
 win = GraphWin("NeuralNetworkGraph",600,600) 
-neurons = [] 
+brain = [] 
 
 def was_click_perceived(x,y): 
-	for i in range(len(neurons)): 
-		nr = neurons[i].getRadius()
-		nc = neurons[i].getCenter() 
-		nx = nc.getX() 
-		ny = nc.getY() 
+	for i in range(len(brain)): 
+		nr = brain[i].radius() 
+		nx,ny = brain[i].get_coords()  
 
 		if (( nx-nr <= x <= nx+nr ) and ( ny-nr <= y <= ny+nr )):
-			print "neuron "+str(i+1)+" perceived something!"
-			return True
+			if (brain[i].is_sensorial()):
+				print "neuron "+str(i+1)+" perceived something!"
+				return True
 
 	print "no neuron perceived anything =(" 
 	return False 
@@ -27,28 +32,28 @@ def get_click():
 
 def draw_neurons(sensorials,terminals): 
 	margin = 30 
+	space = win.getWidth()-margin
 
 	# draw sensorial neurons 
-	interval = (win.getWidth()-(margin))/sensorials 
-	x = margin*2
+	interval = space/sensorials 
+	x = margin*2 
 	y = 50 
-
 	for i in range(sensorials): 
-		point = Point(x,y) 
-		circle = Circle(point,20) 
-		circle.draw(win) 
-		neurons.append(circle) 
+		weight = random.uniform(0.0,1.0) 
+		neuron = Neuron(x,y,SENSORIAL,weight) 
+		neuron.draw(win) 
+		brain.append(neuron) 
 		x = x+interval 
 
 	# draw terminal neurons 
-	interval = (win.getWidth()-(margin))/terminals 
-	x = margin*2
+	interval = space/terminals 
+	x = margin*2 
 	y = win.getHeight()-40 
 	for i in range(terminals): 
-		point = Point(x,y) 
-		circle = Circle(point,20) 
-		circle.draw(win) 
-		neurons.append(circle) 
+		weight = random.uniform(0.0,1.0) 
+		neuron = Neuron(x,y,TERMINAL,weight) 
+		neuron.draw(win) 
+		brain.append(neuron) 
 		x = x+interval 
 
 
