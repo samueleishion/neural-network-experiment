@@ -16,6 +16,7 @@ def was_click_perceived(x,y):
 
 		if (( nx-nr <= x <= nx+nr ) and ( ny-nr <= y <= ny+nr )):
 			if (brain[i].is_sensorial()):
+				brain[i].light_up() 
 				print "neuron "+str(i+1)+" perceived something!"
 				return True
 

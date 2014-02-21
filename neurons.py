@@ -1,4 +1,5 @@
 from graphics import * 
+from time import sleep 
 
 class Neuron: 
 	def __init__(self,x,y,neuron_type,weight): 
@@ -35,3 +36,11 @@ class Neuron:
 
 	def is_terminal(self): 
 		return self.t==2 
+
+	def light_up(self): 
+		gb = 0
+		while(gb<=255):
+			self.circle.setFill(color_rgb(255,gb,gb)) 
+			sleep(0.03) 
+			gb += 51
+	
