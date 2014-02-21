@@ -11,7 +11,7 @@ def was_click_perceived(x,y):
 		ny = nc.getY() 
 
 		if (( nx-nr <= x <= nx+nr ) and ( ny-nr <= y <= ny+nr )):
-			print "neuron "+str(i)+" perceived something!"
+			print "neuron "+str(i+1)+" perceived something!"
 			return True
 
 	print "no neuron perceived anything =(" 
@@ -25,27 +25,38 @@ def get_click():
 	point.draw(win) 
 	return x,y
 
-def draw_neuron(): 
-	point = Point(200,200) 
-	circle = Circle(point,20) 
-	circle.draw(win) 
-	neurons.append(circle) 
+def draw_neurons(sensorials,terminals): 
+	margin = 30 
 
-	point = Point(330,430) 
-	circle = Circle(point,20) 
-	circle.draw(win) 
-	neurons.append(circle) 
+	# draw sensorial neurons 
+	interval = (win.getWidth()-(margin))/sensorials 
+	x = margin*2
+	y = 50 
 
-	point = Point(120,540) 
-	circle = Circle(point,20) 
-	circle.draw(win) 
-	neurons.append(circle) 
+	for i in range(sensorials): 
+		point = Point(x,y) 
+		circle = Circle(point,20) 
+		circle.draw(win) 
+		neurons.append(circle) 
+		x = x+interval 
+
+	# draw terminal neurons 
+	interval = (win.getWidth()-(margin))/terminals 
+	x = margin*2
+	y = win.getHeight()-40 
+	for i in range(terminals): 
+		point = Point(x,y) 
+		circle = Circle(point,20) 
+		circle.draw(win) 
+		neurons.append(circle) 
+		x = x+interval 
+
 
 def main(): 
 	point = Point(300,300) 
 	point.draw(win) 
 
-	draw_neuron() 
+	draw_neurons(5,6) 
 	while(True): 
 		click = get_click() 
 		was_click_perceived(click[0],click[1]) 
