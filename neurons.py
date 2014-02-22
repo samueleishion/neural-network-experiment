@@ -1,3 +1,4 @@
+import random 
 from graphics import * 
 from time import sleep 
 
@@ -44,12 +45,32 @@ class Neuron:
 	def is_terminal(self): 
 		return self.t==2 
 
+	def get_color(self,gb):
+		if(self.is_sensorial()):
+			return color_rgb(255,gb,gb) 
+		elif(self.is_terminal()):
+			return color_rgb(gb,gb,255) 
+		else:
+			return color_rgb(255,255,gb) 
+
 	def light_up(self): 
 		gb = 0
+		self.circle.setFill(self.get_color(gb)) 
+
+		if(not self.is_terminal()):
+			for i in range(len(self.axons)): 
+				rand = random.randint(0,1)
+				transmission = random.uniform(0.7,1.3) 
+				if(rand==0): 
+					# print "neuron sending "+str(transmission*self.w)
+					self.axons[i].send(transmission*self.w)  
+				# else: 
+					# print "neuron didn't send anything"
+
 		while(gb<=255):
-			self.circle.setFill(color_rgb(255,gb,gb)) 
+			self.circle.setFill(self.get_color(gb)) 
 			sleep(0.03) 
-			gb += 51
+			gb += 51 
 
 	def axon(self,other,win):
 		self.axons.append(other) 
@@ -62,3 +83,8 @@ class Neuron:
 		line = Line(p1,p2) 
 		line.setFill(color_rgb(200,200,200)) 
 		line.draw(win) 
+
+	def send(self,transmission): 
+		# print "my weight: "+str(self.w) 
+		if(transmission>0.001): 
+			self.light_up() 

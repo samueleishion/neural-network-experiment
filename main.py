@@ -17,10 +17,10 @@ def was_click_perceived(x,y):
 		if (( nx-nr <= x <= nx+nr ) and ( ny-nr <= y <= ny+nr )):
 			if (brain[i].is_sensorial()):
 				brain[i].light_up() 
-				print "neuron "+str(i+1)+" perceived something!"
+				# print "neuron "+str(i+1)+" perceived something!"
 				return True
 
-	print "no neuron perceived anything =(" 
+	# print "no neuron perceived anything =(" 
 	return False 
 
 def get_click(): 
@@ -40,12 +40,12 @@ def connect_neurons(sensorials,terminals):
 			if(rand==2):
 				brain[i].axon(brain[sensorials+j],win) 
 
-	base = sensorials+transmitters 
-	for i in range(terminals): 
-		for j in range(transmitters): 
+	base = sensorials+transmitters
+	for i in range(transmitters): 
+		for j in range(terminals): 
 			rand = random.randint(0,3) 
 			if(rand==3): 
-				brain[base+i].axon(brain[sensorials+j],win) 
+				brain[sensorials+i].axon(brain[base+j],win) 
 	
 
 def draw_neurons(sensorials,terminals): 
@@ -79,7 +79,7 @@ def draw_neurons(sensorials,terminals):
 	x = margin*2 
 	y = win.getHeight()-40 
 	for i in range(terminals): 
-		weight = random.uniform(0.0,1.0) 
+		weight = random.uniform(0.0,2.0) 
 		neuron = Neuron(x,y,TERMINAL,weight) 
 		neuron.draw(win) 
 		brain.append(neuron) 
