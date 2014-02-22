@@ -12,26 +12,26 @@ class Neuron:
 
 	def draw(self,win): 
 		point = Point(self.x,self.y) 
-		self.circle = Circle(point,20) 
+		self.body = Circle(point,20) 
 
 		if(self.t==0): 
-			self.circle.setOutline(color_rgb(150,0,0)) 
+			self.body.setOutline(color_rgb(150,0,0)) 
 		elif(self.t==2): 
-			self.circle.setOutline(color_rgb(0,0,150)) 
+			self.body.setOutline(color_rgb(0,0,150)) 
 
-		self.circle.draw(win) 
+		self.body.draw(win) 
 
 	def radius(self): 
-		return self.circle.getRadius() 
+		return self.body.getRadius() 
 
 	def center(self): 
-		return self.circle.getCenter() 
+		return self.body.getCenter() 
 
 	def getX(self): 
-		return self.circle.getCenter().getX() 
+		return self.body.getCenter().getX() 
 
 	def getY(self): 
-		return self.circle.getCenter().getY() 
+		return self.body.getCenter().getY() 
 
 	def get_coords(self): 
 		return self.getX(),self.getY() 
@@ -55,7 +55,7 @@ class Neuron:
 
 	def light_up(self): 
 		gb = 0
-		self.circle.setFill(self.get_color(gb)) 
+		self.body.setFill(self.get_color(gb)) 
 
 		if(not self.is_terminal()):
 			for i in range(len(self.axons)): 
@@ -68,7 +68,7 @@ class Neuron:
 					# print "neuron didn't send anything"
 
 		while(gb<=255):
-			self.circle.setFill(self.get_color(gb)) 
+			self.body.setFill(self.get_color(gb)) 
 			sleep(0.03) 
 			gb += 51 
 

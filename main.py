@@ -52,8 +52,8 @@ def connect_neurons(sensorials,terminals):
 	base = sensorials+transmitters
 	for i in range(transmitters): 
 		for j in range(terminals): 
-			rand = random.randint(0,3) 
-			if(rand==3): 
+			rand = random.randint(0,5) 
+			if(rand==0): 
 				brain[sensorials+i].axon(brain[base+j],win) 
 	
 
