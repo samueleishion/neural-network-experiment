@@ -67,7 +67,7 @@ def draw_neurons(sensorials,terminals):
 	y = 50 
 	for i in range(sensorials): 
 		weight = random.uniform(0.0,1.0) 
-		neuron = Neuron(x,y,SENSORIAL,weight) 
+		neuron = Neuron(x,y,SENSORIAL,weight,i+1) 
 		neuron.draw(win) 
 		brain.append(neuron) 
 		x = x+interval 
@@ -89,7 +89,7 @@ def draw_neurons(sensorials,terminals):
 	y = win.getHeight()-40 
 	for i in range(terminals): 
 		weight = random.uniform(0.0,2.0) 
-		neuron = Neuron(x,y,TERMINAL,weight) 
+		neuron = Neuron(x,y,TERMINAL,weight,i+1) 
 		neuron.draw(win) 
 		brain.append(neuron) 
 		x = x+interval 

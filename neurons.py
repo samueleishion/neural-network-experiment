@@ -3,11 +3,12 @@ from graphics import *
 from time import sleep 
 
 class Neuron: 
-	def __init__(self,x,y,neuron_type,weight): 
+	def __init__(self,x,y,neuron_type,weight,id_num=0): 
 		self.x = x 
 		self.y = y 
 		self.t = neuron_type 
 		self.w = weight 
+		self.id = id_num 
 		self.axons = [] 
 
 	def draw(self,win): 
@@ -20,6 +21,10 @@ class Neuron:
 			self.body.setOutline(color_rgb(0,0,150)) 
 
 		self.body.draw(win) 
+
+		if(self.id>0):
+			text = Text(point,str(self.id))
+			text.draw(win) 
 
 	def radius(self): 
 		return self.body.getRadius() 
