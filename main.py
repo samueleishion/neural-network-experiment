@@ -31,6 +31,23 @@ def get_click():
 	point.draw(win) 
 	return x,y
 
+def connect_neurons(sensorials,terminals): 
+	transmitters = len(brain)-sensorials-terminals 
+
+	for i in range(sensorials): 
+		for j in range(transmitters):
+			rand = random.randint(0,2) 
+			if(rand==2):
+				brain[i].axon(brain[sensorials+j],win) 
+
+	base = sensorials+transmitters 
+	for i in range(terminals): 
+		for j in range(transmitters): 
+			rand = random.randint(0,3) 
+			if(rand==3): 
+				brain[base+i].axon(brain[sensorials+j],win) 
+	
+
 def draw_neurons(sensorials,terminals): 
 	margin = 30 
 	space = win.getWidth()-margin
@@ -46,6 +63,17 @@ def draw_neurons(sensorials,terminals):
 		brain.append(neuron) 
 		x = x+interval 
 
+	# draw transmitter neurons 
+	transmitters = sensorials+terminals 
+	interval = space/transmitters 
+	for i in range(transmitters): 
+		x = random.randint(margin,win.getWidth()-margin) 
+		y = random.randint(100,win.getHeight()-80)
+		weight = random.uniform(0.0,1.0)
+		neuron = Neuron(x,y,TRANSMITTER,weight) 
+		neuron.draw(win) 
+		brain.append(neuron) 
+
 	# draw terminal neurons 
 	interval = space/terminals 
 	x = margin*2 
@@ -56,6 +84,8 @@ def draw_neurons(sensorials,terminals):
 		neuron.draw(win) 
 		brain.append(neuron) 
 		x = x+interval 
+
+	connect_neurons(sensorials,terminals) 
 
 
 def main(): 

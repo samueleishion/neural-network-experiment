@@ -7,10 +7,17 @@ class Neuron:
 		self.y = y 
 		self.t = neuron_type 
 		self.w = weight 
+		self.axons = [] 
 
 	def draw(self,win): 
 		point = Point(self.x,self.y) 
 		self.circle = Circle(point,20) 
+
+		if(self.t==0): 
+			self.circle.setOutline(color_rgb(150,0,0)) 
+		elif(self.t==2): 
+			self.circle.setOutline(color_rgb(0,0,150)) 
+
 		self.circle.draw(win) 
 
 	def radius(self): 
@@ -43,4 +50,15 @@ class Neuron:
 			self.circle.setFill(color_rgb(255,gb,gb)) 
 			sleep(0.03) 
 			gb += 51
-	
+
+	def axon(self,other,win):
+		self.axons.append(other) 
+		ox,oy = other.get_coords() 
+		tx,ty = self.get_coords() 
+
+		p1 = Point(tx,ty) 
+		p2 = Point(ox,oy) 
+
+		line = Line(p1,p2) 
+		line.setFill(color_rgb(200,200,200)) 
+		line.draw(win) 
