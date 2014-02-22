@@ -2,11 +2,20 @@ import random
 from graphics import * 
 from neurons import * 
 
+WINDOW_X = 600 
+WINDOW_Y = 600 
+SENSORY_NEURONS = 5
+TERMINAL_NEURONS = 6
+
+## ===================================
+## 	NO NEED TO EDIT BEYOND THIS POINT 
+## ===================================
+
 SENSORIAL = 0 
 TRANSMITTER = 1 
 TERMINAL = 2 
 
-win = GraphWin("NeuralNetworkGraph",600,600) 
+win = GraphWin("NeuralNetworkGraph",WINDOW_X,WINDOW_Y) 
 brain = [] 
 
 def was_click_perceived(x,y): 
@@ -89,10 +98,7 @@ def draw_neurons(sensorials,terminals):
 
 
 def main(): 
-	point = Point(300,300) 
-	point.draw(win) 
-
-	draw_neurons(5,6) 
+	draw_neurons(SENSORY_NEURONS,TERMINAL_NEURONS) 
 	while(True): 
 		click = get_click() 
 		was_click_perceived(click[0],click[1]) 
